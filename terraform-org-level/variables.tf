@@ -22,3 +22,39 @@ variable "vm_machine_type" {
      prod = "n2-standard"
   }
 }
+
+variable "gcs_bucket_names" {\
+  type    = list(string)
+  default = ["bucket-dev","bucket-test","bucket-prod"]
+}
+
+variable "bigquery_datasets" {
+  type = map(object({
+    location : string
+    tables   : list(string)
+  }))
+  default = {
+    dev  = { location = "US", tables = ["dev_table1", "dev_table2"] }
+    test = { location = "US", tables = ["test_table1"] } 
+    prod = { location = "US", tables = ["prod_table1, "prod_table2"] }
+  }
+}
+
+variable "firewall_rules" {
+  type = list(object({
+    name   : string
+    network : string
+    allow   : list(object({ protocol : string, ports : list(string) }))
+    source_ranges : list(string) 
+  }))
+  default = [
+    {
+      name    = "allow-ssh"
+      network = "vpc-network"
+      allow   = [{ protocol = "tcp", ports = ["22"] }]
+      source_ranges = ["0.0.0.0/0"]
+    }
+  ]
+}
+
+
