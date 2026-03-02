@@ -57,5 +57,9 @@ variable "firewall_rules" {
   ]
 }
 
+variable "api_gateway_names" {
+  type    = set(string)
+  default = ["api-gateway-dev","api-gateway-test","api-gateway-prod"]
+}
 
 
