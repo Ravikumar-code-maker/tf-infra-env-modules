@@ -18,7 +18,7 @@ module "vm" {
 
 module "gcs" {
   source        = "../../modules/gcs"
-  bucket_names  = var.gcs_bucket_names
+  bucket_names  = var.gcs_bucket_name
   region        = var.region
 }
 
@@ -32,6 +32,7 @@ module "apigateway" {
   gateway_names = var.api_gateway_names
   region        = var.region
 }
+
 
 
 
