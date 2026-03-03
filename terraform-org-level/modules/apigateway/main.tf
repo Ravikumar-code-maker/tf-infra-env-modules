@@ -11,5 +11,11 @@ resource "google_api_gateway_api_config" "api_config" {
     documenrt {
       path = "openapi.yaml"
     }
-  }
+   
+}
+resource "google_api_gateway_gateway" "gateway" {
+  for_each  = var.gateway_names
+  gateway_id = each.key
+  api_config = google_api_gateway_api_config.api_config[each.key].id
+  location   = var.region
 }
