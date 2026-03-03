@@ -6,8 +6,9 @@ variable "bucket_names" {
 
 variable "region" {
   type    = string
-  default = "US"
+  default = "us-central1"
 }
+
 
 
 
