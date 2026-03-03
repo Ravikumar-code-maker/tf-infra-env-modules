@@ -1,0 +1,21 @@
+swagger: "2.0"
+info:
+  title: sample-api
+  description: Sample API Gateway
+  version: 1.0.0
+
+schemes:
+  - https
+
+paths:
+  /hello:
+    get:
+      summary: Hello endpoint
+      operationId: hello
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
+      x-google-backend:
+        address: https://us-central1-YOUR_PROJECT_ID.cloudfunctions.net/hello-function
