@@ -1,6 +1,6 @@
 module "vpc" {
   source       = "../../modules/vpc"
-  network_name = "dev-vpc"bucket
+  network_name = "dev-vpc"
   subnet_cidr  = "10.0.1.0/24"
   region       = var.region
   firewall_rules = var.firewall_rules
@@ -32,3 +32,4 @@ module "apigateway" {
   gateway_names = var.api_gateway_names
   region        = var.region
 }
+
