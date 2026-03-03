@@ -7,7 +7,8 @@ resource "google_bigquery_dataset" "datasets" {
 resource "google_bigquery_table" "tables" {
   for_each = { for ds_name, ds in var.datasets : ds_name => ds.tables... }
 
-  dataset_is = each.keyn 
+  dataset_id = each.key
   table_id   = each.value
   schema     = file("schema.json")
 }
+
