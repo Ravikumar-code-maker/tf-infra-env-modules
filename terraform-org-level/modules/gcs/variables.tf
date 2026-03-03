@@ -1,6 +1,6 @@
-variable "gcs_bucket_names" {
+variable "bucket_names" {
   type    = list(string)
-  default = ["bucket-dev","bucket-test","bucket-prod"]
+  description = "List of GCS bucket names"
 
 }
 
@@ -8,6 +8,7 @@ variable "region" {
   type    = string
   default = "US"
 }
+
 
 
 
