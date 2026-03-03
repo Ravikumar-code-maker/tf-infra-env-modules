@@ -23,7 +23,7 @@ variable "vm_machine_type" {
   }
 }
 
-variable "gcs_bucket_name" {
+variable "gcs_bucket_names" {
   type    = list(string)
   default = ["bucket-dev","bucket-test","bucket-prod"]
 }
@@ -61,6 +61,7 @@ variable "api_gateway_names" {
   type    = set(string)
   default = ["api-gateway-dev","api-gateway-test","api-gateway-prod"]
 }
+
 
 
 
