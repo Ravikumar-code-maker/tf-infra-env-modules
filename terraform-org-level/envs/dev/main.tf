@@ -17,9 +17,9 @@ module "vm" {
 }
 
 module "gcs" {
-  source       = "../../modules/gcs"
-  bucket_name  = var.gcs_bucket_name
-  region       = var.region
+  source        = "../../modules/gcs"
+  bucket_names  = var.gcs_bucket_names
+  region        = var.region
 }
 
 module "bigquery" {
@@ -32,5 +32,6 @@ module "apigateway" {
   gateway_names = var.api_gateway_names
   region        = var.region
 }
+
 
 
