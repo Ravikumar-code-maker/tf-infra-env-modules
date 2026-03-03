@@ -381,3 +381,81 @@ each.value = rule data
 Create resource
 
 If you want, I can now show you what happens inside Terraform state so you understand why the key is important.
+
+-----------------------------
+-----------------------------
+-----------------------------\
+-----------------------------
+
+Ah! Let me explain this clearly. 🙂
+
+This line appears in Terraform when you want to create multiple resources from a list:
+
+for_each = toset(var.bucket_names)
+1️⃣ var.bucket_names
+
+This is a variable in your module.
+
+For example, in variables.tf:
+
+variable "bucket_names" {
+  type = list(string)
+  description = "List of GCS bucket names"
+}
+
+When you call the module:
+
+bucket_names = ["dev-bucket-1", "dev-bucket-2"]
+
+var.bucket_names is now a list of strings:
+
+["dev-bucket-1", "dev-bucket-2"]
+2️⃣ toset()
+
+Terraform requires a set or map for for_each.
+
+toset() converts a list to a set of unique items.
+
+Example:
+
+toset(["dev-bucket-1", "dev-bucket-2", "dev-bucket-1"])
+
+becomes:
+
+{"dev-bucket-1", "dev-bucket-2"}   # duplicates removed
+
+This ensures Terraform creates one resource per unique bucket.
+
+3️⃣ for_each in resources
+
+When you do:
+
+resource "google_storage_bucket" "buckets" {
+  for_each = toset(var.bucket_names)
+  name     = each.value
+  location = var.region
+}
+
+Terraform will create a separate bucket resource for each item in var.bucket_names.
+
+each.value is the current bucket name.
+
+If var.bucket_names = ["dev-bucket-1", "dev-bucket-2"]:
+
+Terraform will create:
+
+google_storage_bucket.buckets["dev-bucket-1"]
+
+google_storage_bucket.buckets["dev-bucket-2"]
+
+✅ Summary
+
+for_each = loop over multiple items.
+
+toset() = make the list a set (Terraform requires this for for_each).
+
+each.value = the current item in the loop.
+
+Result: Terraform dynamically creates multiple resources from one block.
+
+If you want, I can rewrite your GCS module example with for_each so that you can create any number of buckets per environment without errors.
