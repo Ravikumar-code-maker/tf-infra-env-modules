@@ -7,7 +7,7 @@ variable "subnet_cidr" {
 }
 
 variable "region" {
-  tyep  = string
+  type  = string
 }
 
 variable "firewall_rules" {
@@ -18,3 +18,4 @@ variable "firewall_rules" {
   source_ranges : list(string)
   }))
 }
+
