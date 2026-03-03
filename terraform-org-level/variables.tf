@@ -36,7 +36,7 @@ variable "bigquery_datasets" {
   default = {
     dev  = { location = "US", tables = ["dev_table1", "dev_table2"] }
     test = { location = "US", tables = ["test_table1"] } 
-    prod = { location = "US", tables = ["prod_table1, "prod_table2"] }
+    prod = { location = "US", tables = ["prod_table1", "prod_table2"] }
   }
 }
 
@@ -61,5 +61,6 @@ variable "api_gateway_names" {
   type    = set(string)
   default = ["api-gateway-dev","api-gateway-test","api-gateway-prod"]
 }
+
 
 
